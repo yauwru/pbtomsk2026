@@ -42,3 +42,14 @@ model Message {
   content   String
   createdAt DateTime @default(now())
 }
+
+model BankAccount {
+  id            String   @id @default(cuid())
+  bankName      String
+  accountName   String
+  accountNumber String
+  currency      String   @default("IDR")
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

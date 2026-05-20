@@ -19,12 +19,12 @@ const features = [
     glow: 'hover:shadow-[0_0_24px_rgba(30,80,20,0.25)]',
   },
   {
-    href: '/admin',
-    icon: <CrossIcon className="w-6 h-8 text-red-800/70 block mb-2" />,
-    title: 'Panitia',
-    desc: 'Registrasi peserta, absensi, dan undian berhadiah.',
-    border: 'border-red-900/40 hover:border-red-800/60',
-    glow: 'hover:shadow-[0_0_24px_rgba(139,16,16,0.25)]',
+    href: '/sumbangan',
+    icon: <span className="text-2xl block mb-2">🤝</span>,
+    title: 'Sumbangan Sukarela',
+    desc: 'Bantu korban pengungsi Papua. Donasi sukarela untuk sesama.',
+    border: 'border-blue-900/40 hover:border-blue-700/60',
+    glow: 'hover:shadow-[0_0_24px_rgba(30,60,120,0.25)]',
   },
 ]
 
@@ -127,10 +127,13 @@ export default function Home() {
       {/* Bottom mist fade */}
       <div className="h-px bg-gradient-to-r from-transparent via-amber-900/30 to-transparent" />
 
-      <footer className="py-4 text-center">
+      <footer className="py-4 text-center flex items-center justify-center gap-4">
         <p className="text-amber-700/60 text-xs tracking-widest uppercase">
           Terbuka Untuk Umum · Fee Sukarela
         </p>
+        <Link href="/admin" className="text-amber-900/50 text-[10px] tracking-widest hover:text-amber-700/60 transition-colors uppercase">
+          Panitia
+        </Link>
       </footer>
     </div>
   )
