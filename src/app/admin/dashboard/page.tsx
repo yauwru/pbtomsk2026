@@ -8,6 +8,7 @@ import AttendeeList from '@/components/attendance/AttendeeList'
 import EligibleList from '@/components/raffle/EligibleList'
 import RaffleSpinner from '@/components/raffle/RaffleSpinner'
 import Button from '@/components/ui/Button'
+import CrossIcon from '@/components/ui/CrossIcon'
 import { AttendeeWithSessions, SessionTypeName, RaffleWinner } from '@/types'
 
 type Tab = 'peserta' | 'undian'
@@ -110,7 +111,7 @@ export default function AdminDashboard() {
         <div className="flex border-b border-amber-900/20 mt-6">
           {([
             { key: 'peserta', label: '👥 Peserta & Absensi' },
-            { key: 'undian', label: '✝ Undian' },
+            { key: 'undian', label: '† Undian' },
           ] as { key: Tab; label: string }[]).map(t => (
             <button
               key={t.key}

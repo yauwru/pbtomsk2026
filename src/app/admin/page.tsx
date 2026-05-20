@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
+import CrossIcon from '@/components/ui/CrossIcon'
 
 export default function AdminLoginPage() {
   const [password, setPassword] = useState('')
@@ -44,7 +45,7 @@ export default function AdminLoginPage() {
                 style={{ fontFamily: 'var(--font-cinzel)' }}>
             ← Beranda
           </Link>
-          <div className="text-4xl text-red-800/60 mt-6 mb-3" style={{ fontFamily: 'var(--font-cinzel)' }}>✝</div>
+          <CrossIcon className="w-8 h-10 text-red-800/60 mx-auto mt-6 mb-3" />
           <h1 className="text-xl font-bold text-amber-200/80"
               style={{ fontFamily: 'var(--font-cinzel)', textShadow: '0 0 20px rgba(196,154,60,0.2)' }}>
             Panel Panitia

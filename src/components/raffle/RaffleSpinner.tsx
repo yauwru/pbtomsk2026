@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Button from '@/components/ui/Button'
+import CrossIcon from '@/components/ui/CrossIcon'
 import WinnerDisplay from './WinnerDisplay'
 
 interface Attendee { id: string; name: string }
@@ -77,7 +78,7 @@ export default function RaffleSpinner({ eligible, existingWinner, onWinnerSaved 
       `}>
         <p className="text-amber-700/50 text-[10px] font-semibold mb-3 tracking-[0.4em] uppercase"
            style={{ fontFamily: 'var(--font-cinzel)' }}>
-          {running ? '⟳ Mengocok nama...' : '✝ Siap Undian'}
+          {running ? '⟳ Mengocok nama...' : '† Siap Undian'}
         </p>
         <p className={`text-amber-200 font-bold text-2xl md:text-3xl min-h-[2.5rem] transition-all
                        ${running ? 'blur-[1.5px] opacity-80' : ''}`}
@@ -88,7 +89,7 @@ export default function RaffleSpinner({ eligible, existingWinner, onWinnerSaved 
 
       {!running && !winner && (
         <Button variant="primary" size="lg" onClick={startRaffle} disabled={!eligible.length} className="px-10">
-          ✝ Mulai Undian
+          <CrossIcon className="inline-block w-3 h-4 mr-1.5 align-[-1px]" /> Mulai Undian
         </Button>
       )}
       {winner && !showWinner && (

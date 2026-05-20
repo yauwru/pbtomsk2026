@@ -82,17 +82,28 @@ body {
   );
 }
 
-/* Cross watermark */
+/* Cross watermark — CSS-drawn to avoid emoji rendering on iOS */
 .cross-watermark::before {
-  content: '✝';
+  content: '';
   position: absolute;
-  font-size: 20rem;
-  color: rgba(139,16,16,0.04);
+  width: 5rem;
+  height: 18rem;
+  background-color: rgba(139,16,16,0.04);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  font-family: var(--font-cinzel);
+}
+.cross-watermark::after {
+  content: '';
+  position: absolute;
+  width: 16rem;
+  height: 5rem;
+  background-color: rgba(139,16,16,0.04);
+  top: calc(50% - 4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
 }
 
 /* Tribal line pattern */

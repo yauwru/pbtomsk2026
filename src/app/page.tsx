@@ -1,9 +1,10 @@
 import Link from 'next/link'
+import CrossIcon from '@/components/ui/CrossIcon'
 
 const features = [
   {
     href: '/twibon',
-    icon: '📸',
+    icon: <span className="text-2xl block mb-2">📸</span>,
     title: 'Foto Twibon',
     desc: 'Foto dengan frame khusus acara. Siap upload ke IG Story.',
     border: 'border-amber-700/40 hover:border-amber-600/70',
@@ -11,7 +12,7 @@ const features = [
   },
   {
     href: '/pesan',
-    icon: '✍️',
+    icon: <span className="text-2xl block mb-2">✍️</span>,
     title: 'Pesan & Kesan',
     desc: 'Tulis pendapatmu tentang film ini secara anonim.',
     border: 'border-green-900/40 hover:border-green-700/60',
@@ -19,12 +20,11 @@ const features = [
   },
   {
     href: '/admin',
-    icon: '✝',
+    icon: <CrossIcon className="w-6 h-8 text-red-800/70 block mb-2" />,
     title: 'Panitia',
     desc: 'Registrasi peserta, absensi, dan undian berhadiah.',
     border: 'border-red-900/40 hover:border-red-800/60',
     glow: 'hover:shadow-[0_0_24px_rgba(139,16,16,0.25)]',
-    iconStyle: { fontFamily: 'var(--font-cinzel)', fontSize: '1.5rem' },
   },
 ]
 
@@ -64,7 +64,7 @@ export default function Home() {
             <h1 className="text-6xl md:text-8xl font-black tracking-wider leading-none"
                 style={{ fontFamily: 'var(--font-cinzel)', color: '#d4c08a',
                          textShadow: '0 2px 40px rgba(196,154,60,0.25), 0 0 80px rgba(10,19,10,0.8)' }}>
-              PES<span style={{ color: '#a81818' }}>✝</span>A
+              PES<CrossIcon className="inline-block w-[0.6em] h-[0.8em] align-[-0.1em]" style={{ color: '#a81818' }} />A
             </h1>
             <h1 className="text-6xl md:text-8xl font-black tracking-wider leading-none -mt-2"
                 style={{ fontFamily: 'var(--font-cinzel)', color: '#d4c08a',
@@ -112,7 +112,7 @@ export default function Home() {
                   ${f.border} ${f.glow}
                 `}
               >
-                <span className="text-2xl block mb-2" style={f.iconStyle}>{f.icon}</span>
+                {f.icon}
                 <h3 className="text-amber-200/90 font-semibold text-sm mb-1"
                     style={{ fontFamily: 'var(--font-cinzel)' }}>
                   {f.title}

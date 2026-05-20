@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Button from '@/components/ui/Button'
+import CrossIcon from '@/components/ui/CrossIcon'
 
 interface Props {
   winner: { attendeeId: string; attendeeName: string }
@@ -26,10 +27,8 @@ export default function WinnerDisplay({ winner, onClose }: Props) {
     <div className="flex flex-col items-center gap-6 py-10 text-center">
       {/* Cross + star */}
       <div className="relative">
-        <div className="text-5xl text-amber-500/80 animate-pulse"
-             style={{ fontFamily: 'var(--font-cinzel)', textShadow: '0 0 40px rgba(196,154,60,0.5)' }}>
-          ✝
-        </div>
+        <CrossIcon className="w-10 h-14 text-amber-500/80 animate-pulse"
+                   style={{ filter: 'drop-shadow(0 0 20px rgba(196,154,60,0.5))' }} />
         <div className="text-2xl absolute -top-2 -right-3">⭐</div>
       </div>
 

@@ -7,6 +7,7 @@ import TwibonUpload from '@/components/twibon/TwibonUpload'
 import TwibonCanvas from '@/components/twibon/TwibonCanvas'
 import TwibonResult from '@/components/twibon/TwibonResult'
 import Button from '@/components/ui/Button'
+import CrossIcon from '@/components/ui/CrossIcon'
 
 const TwibonCamera = dynamic(() => import('@/components/twibon/TwibonCamera'), { ssr: false })
 
@@ -79,7 +80,7 @@ export default function TwibonPage() {
 
         {mode === 'processing' && (
           <div className="text-center py-20">
-            <div className="text-4xl animate-spin inline-block mb-4 text-amber-600">✝</div>
+            <CrossIcon className="w-8 h-10 animate-spin inline-block mb-4 text-amber-600" />
             <p className="text-[#8a7a5a] text-sm tracking-wider">Menambahkan frame...</p>
           </div>
         )}
