@@ -16,7 +16,7 @@ export default function EligibleList({ eligible }: { eligible: Attendee[] }) {
         </h3>
       </div>
       {eligible.length === 0 ? (
-        <p className="text-[#4a3a20] text-xs italic">
+        <p className="text-amber-700/70 text-xs italic">
           Belum ada peserta yang hadir di 3 sesi absensi.
         </p>
       ) : (
@@ -24,7 +24,7 @@ export default function EligibleList({ eligible }: { eligible: Attendee[] }) {
           {eligible.map((a, i) => (
             <div key={a.id}
                  className="flex items-center gap-2 bg-green-950/20 border border-green-900/20 rounded-lg px-3 py-2">
-              <span className="text-[#4a3a20] text-[10px]">{i + 1}.</span>
+              <span className="text-amber-700/60 text-[10px]">{i + 1}.</span>
               <span className="text-amber-200/70 text-xs">{a.name}</span>
             </div>
           ))}

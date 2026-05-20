@@ -27,9 +27,9 @@ export default function TwibonUpload({ onImage }: Props) {
       <input ref={inputRef} type="file" accept="image/*" className="hidden"
              onChange={e => { const f = e.target.files?.[0]; if (f) readFile(f) }} />
       <div className="text-4xl mb-3 text-amber-700/50">🖼️</div>
-      <p className="text-[#6a5a3a] text-sm mb-3">Seret foto ke sini atau</p>
+      <p className="text-amber-600/70 text-sm mb-3">Seret foto ke sini atau</p>
       <Button variant="secondary" size="sm" type="button">Pilih Foto dari Galeri</Button>
-      <p className="text-[#3a3020] text-xs mt-3">JPG, PNG, WEBP · Hasil: 1080×1920 px (IG Story)</p>
+      <p className="text-amber-700/60 text-xs mt-3">JPG, PNG, WEBP · Hasil: 1080×1920 px (IG Story)</p>
     </div>
   )
 }

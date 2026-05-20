@@ -44,7 +44,7 @@ export default function AttendeeList({ attendees, onRemoved, onCheckin }: Props)
   }
 
   if (attendees.length === 0) {
-    return <p className="text-center text-[#4a3a20] py-10 italic text-sm">Belum ada peserta terdaftar.</p>
+    return <p className="text-center text-amber-700/70 py-10 italic text-sm">Belum ada peserta terdaftar.</p>
   }
 
   return (
@@ -73,7 +73,7 @@ export default function AttendeeList({ attendees, onRemoved, onCheckin }: Props)
               <tr key={a.id}
                   className={`border-t border-amber-900/10 transition-colors
                     ${eligible ? 'bg-green-950/20' : 'bg-transparent hover:bg-white/2'}`}>
-                <td className="px-4 py-3 text-[#4a3a20]">{idx + 1}</td>
+                <td className="px-4 py-3 text-amber-700/60">{idx + 1}</td>
                 <td className="px-4 py-3 text-amber-200/80 font-medium">
                   {a.name}
                   {eligible && <span className="ml-1.5 text-amber-500">★</span>}
@@ -98,7 +98,7 @@ export default function AttendeeList({ attendees, onRemoved, onCheckin }: Props)
                   <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full tracking-wider
                     ${eligible
                       ? 'bg-green-900/40 text-green-400/80 border border-green-800/30'
-                      : 'bg-amber-900/20 text-[#5a4a30] border border-amber-900/20'}`}
+                      : 'bg-amber-900/20 text-amber-700/70 border border-amber-900/20'}`}
                         style={{ fontFamily: 'var(--font-cinzel)' }}>
                     {eligible ? 'Eligible' : `${count}/3`}
                   </span>

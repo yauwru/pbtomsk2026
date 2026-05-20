@@ -7,6 +7,7 @@ import TwibonUpload from '@/components/twibon/TwibonUpload'
 import TwibonCanvas from '@/components/twibon/TwibonCanvas'
 import TwibonResult from '@/components/twibon/TwibonResult'
 import Button from '@/components/ui/Button'
+import CrossIcon from '@/components/ui/CrossIcon'
 
 const TwibonCamera = dynamic(() => import('@/components/twibon/TwibonCamera'), { ssr: false })
 
@@ -48,7 +49,7 @@ export default function TwibonPage() {
             style={{ fontFamily: 'var(--font-cinzel)', textShadow: '0 0 30px rgba(196,154,60,0.2)' }}>
           📸 Foto Twibon
         </h1>
-        <p className="relative text-[#6a5a3a] text-xs mt-1 tracking-wider">
+        <p className="relative text-amber-600/70 text-xs mt-1 tracking-wider">
           Pesta Babi Papua 2026 · Tomsk, Rusia · IG Story 1080×1920
         </p>
       </div>
@@ -64,7 +65,7 @@ export default function TwibonPage() {
             <TwibonUpload onImage={handleImage} />
             <div className="flex items-center gap-3">
               <div className="flex-1 h-px bg-amber-900/20" />
-              <span className="text-[#4a3a20] text-xs tracking-widest">ATAU</span>
+              <span className="text-amber-700/60 text-xs tracking-widest">ATAU</span>
               <div className="flex-1 h-px bg-amber-900/20" />
             </div>
             <Button variant="secondary" size="lg" className="w-full" onClick={() => setMode('camera')}>
@@ -79,7 +80,7 @@ export default function TwibonPage() {
 
         {mode === 'processing' && (
           <div className="text-center py-20">
-            <div className="text-4xl animate-spin inline-block mb-4 text-amber-600">✝</div>
+            <CrossIcon className="w-8 h-10 animate-spin inline-block mb-4 text-amber-600" />
             <p className="text-[#8a7a5a] text-sm tracking-wider">Menambahkan frame...</p>
           </div>
         )}

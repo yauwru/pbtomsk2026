@@ -45,7 +45,7 @@ export default function PesanPage() {
             style={{ fontFamily: 'var(--font-cinzel)', textShadow: '0 0 30px rgba(196,154,60,0.2)' }}>
           Pesan &amp; Kesan
         </h1>
-        <p className="relative text-[#6a5a3a] text-xs mt-1 italic">
+        <p className="relative text-amber-600/70 text-xs mt-1 italic">
           Bagikan pendapatmu secara anonim
         </p>
       </div>
@@ -60,11 +60,11 @@ export default function PesanPage() {
               Suara Peserta
               <span className="ml-2 text-amber-700/60">({messages.length})</span>
             </h2>
-            <span className="text-[#3a3020] text-xs">refresh 15 dtk</span>
+            <span className="text-amber-700/60 text-xs">refresh 15 dtk</span>
           </div>
 
           {loading ? (
-            <div className="text-center py-12 text-[#4a3a20]">Memuat pesan...</div>
+            <div className="text-center py-12 text-amber-700/70">Memuat pesan...</div>
           ) : (
             <MessageList messages={messages} />
           )}
