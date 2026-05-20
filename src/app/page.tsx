@@ -3,99 +3,135 @@ import Link from 'next/link'
 const features = [
   {
     href: '/twibon',
-    emoji: '📸',
+    icon: '📸',
     title: 'Foto Twibon',
-    desc: 'Foto dengan frame khusus Pesta Babi Papua 2026 dan bagikan ke IG/WA',
-    color: 'bg-amber-600',
-    hover: 'hover:bg-amber-500',
+    desc: 'Foto dengan frame khusus acara. Siap upload ke IG Story.',
+    border: 'border-amber-700/40 hover:border-amber-600/70',
+    glow: 'hover:shadow-[0_0_24px_rgba(196,154,60,0.2)]',
   },
   {
     href: '/pesan',
-    emoji: '💬',
+    icon: '✍️',
     title: 'Pesan & Kesan',
-    desc: 'Tulis pendapatmu tentang film ini secara anonim',
-    color: 'bg-green-800',
-    hover: 'hover:bg-green-700',
+    desc: 'Tulis pendapatmu tentang film ini secara anonim.',
+    border: 'border-green-900/40 hover:border-green-700/60',
+    glow: 'hover:shadow-[0_0_24px_rgba(30,80,20,0.25)]',
   },
   {
     href: '/admin',
-    emoji: '🔐',
-    title: 'Panel Admin',
-    desc: 'Registrasi peserta, absensi, dan undian berhadiah',
-    color: 'bg-red-800',
-    hover: 'hover:bg-red-700',
+    icon: '✝',
+    title: 'Panitia',
+    desc: 'Registrasi peserta, absensi, dan undian berhadiah.',
+    border: 'border-red-900/40 hover:border-red-800/60',
+    glow: 'hover:shadow-[0_0_24px_rgba(139,16,16,0.25)]',
+    iconStyle: { fontFamily: 'var(--font-cinzel)', fontSize: '1.5rem' },
   },
 ]
 
 export default function Home() {
   return (
-    <div className="min-h-screen tribal-pattern">
-      {/* Hero */}
-      <div className="bg-gradient-to-b from-red-900 to-red-800 text-center py-16 px-4 shadow-lg">
-        <p className="text-amber-300 text-sm font-semibold tracking-[0.3em] uppercase mb-3">
-          Komunitas Papua · Tomsk, Rusia
-        </p>
-        <h1
-          className="text-4xl md:text-6xl font-black text-amber-50 leading-tight"
-          style={{ fontFamily: 'var(--font-cinzel)' }}
-        >
-          Nonton Bareng
-        </h1>
-        <h2
-          className="text-3xl md:text-5xl font-bold text-amber-300 mt-1"
-          style={{ fontFamily: 'var(--font-cinzel)' }}
-        >
-          Film Pesta Babi
-        </h2>
-        <p className="text-amber-200/80 mt-4 text-base">
-          Papua 2026 · Tomsk, Russia
-        </p>
-        <div className="mt-6 inline-block bg-amber-600/20 border border-amber-400/40 rounded-full px-5 py-2">
-          <span className="text-amber-300 font-semibold text-sm tracking-wider">
-            #papuabukantanahkosong
-          </span>
-        </div>
-      </div>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Cross watermark */}
+      <div className="cross-watermark absolute inset-0 pointer-events-none" />
 
-      {/* Feature Cards */}
-      <div className="max-w-3xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {features.map((f) => (
-            <Link
-              key={f.href}
-              href={f.href}
-              className={`
-                ${f.color} ${f.hover}
-                text-white rounded-2xl p-6 shadow-lg
-                transition-all duration-200 hover:shadow-xl hover:-translate-y-1
-                flex flex-col gap-3
-              `}
-            >
-              <span className="text-4xl">{f.emoji}</span>
-              <div>
-                <h3
-                  className="text-xl font-bold"
-                  style={{ fontFamily: 'var(--font-cinzel)' }}
-                >
+      {/* Hero */}
+      <div className="relative min-h-[92vh] flex flex-col items-center justify-end pb-12 px-4">
+        {/* Top green atmospheric glow */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1f0a] via-[#0a130a]/80 to-[#080904] pointer-events-none" />
+
+        {/* Organisation logos row */}
+        <div className="absolute top-6 left-0 right-0 flex justify-center">
+          <p className="text-[10px] tracking-[0.25em] uppercase text-amber-600/40 font-[var(--font-cinzel)]">
+            Komunitas Papua · Tomsk, Russia
+          </p>
+        </div>
+
+        {/* Main title block */}
+        <div className="relative z-10 text-center max-w-xl mx-auto">
+          {/* Subtitle above */}
+          <p className="text-amber-500/70 text-xs tracking-[0.3em] uppercase mb-5 font-[var(--font-cinzel)]">
+            Nobar Film &amp; Diskusi Publik
+          </p>
+
+          {/* NONTON BARENG */}
+          <p className="text-[#a09070] text-lg md:text-xl tracking-widest uppercase mb-1"
+             style={{ fontFamily: 'var(--font-cinzel)' }}>
+            Nonton Bareng
+          </p>
+
+          {/* PESTA BABI title — mimics poster */}
+          <div className="relative inline-block">
+            <h1 className="text-6xl md:text-8xl font-black tracking-wider leading-none"
+                style={{ fontFamily: 'var(--font-cinzel)', color: '#d4c08a',
+                         textShadow: '0 2px 40px rgba(196,154,60,0.25), 0 0 80px rgba(10,19,10,0.8)' }}>
+              PES<span style={{ color: '#a81818' }}>✝</span>A
+            </h1>
+            <h1 className="text-6xl md:text-8xl font-black tracking-wider leading-none -mt-2"
+                style={{ fontFamily: 'var(--font-cinzel)', color: '#d4c08a',
+                         textShadow: '0 2px 40px rgba(196,154,60,0.25)' }}>
+              BABI
+            </h1>
+          </div>
+
+          {/* Tagline */}
+          <p className="text-[#8a7a5a] text-sm italic mt-3 mb-1">
+            Kolonialisme di Zaman Kita
+          </p>
+          <p className="text-[#6a5a3a] text-xs leading-relaxed max-w-xs mx-auto">
+            Membaca Krisis Ekologi, Konflik Agraria, dan Ruang Hidup Masyarakat Adat Papua
+          </p>
+
+          {/* Event info chips */}
+          <div className="flex flex-wrap gap-3 justify-center mt-6 mb-8">
+            <span className="panel px-4 py-1.5 rounded-full text-xs text-amber-300/80 tracking-wider">
+              📅 23 Mei 2026
+            </span>
+            <span className="panel px-4 py-1.5 rounded-full text-xs text-amber-300/80 tracking-wider">
+              🕒 15.30 WIB
+            </span>
+            <span className="panel px-4 py-1.5 rounded-full text-xs text-amber-300/80 tracking-wider">
+              📍 Tomsk, Rusia
+            </span>
+          </div>
+
+          {/* Hashtag */}
+          <div className="cross-divider text-xs mb-8">
+            <span className="text-amber-600/60 tracking-widest font-[var(--font-cinzel)]">
+              #papuabukantanahkosong
+            </span>
+          </div>
+
+          {/* Feature cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+            {features.map((f) => (
+              <Link
+                key={f.href}
+                href={f.href}
+                className={`
+                  panel rounded-xl p-5 text-left border transition-all duration-300
+                  ${f.border} ${f.glow}
+                `}
+              >
+                <span className="text-2xl block mb-2" style={f.iconStyle}>{f.icon}</span>
+                <h3 className="text-amber-200/90 font-semibold text-sm mb-1"
+                    style={{ fontFamily: 'var(--font-cinzel)' }}>
                   {f.title}
                 </h3>
-                <p className="text-sm opacity-80 mt-1 leading-relaxed">{f.desc}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Info */}
-        <div className="mt-10 bg-amber-100 border border-amber-300 rounded-2xl p-6 text-center shadow-sm">
-          <p className="text-stone-600 text-sm leading-relaxed">
-            Acara ini diselenggarakan oleh komunitas Papua di Tomsk, Rusia
-            sebagai bentuk apresiasi dan solidaritas terhadap budaya Papua.
-          </p>
-          <p className="text-amber-700 font-bold mt-3 text-sm tracking-wide">
-            #papuabukantanahkosong · #PestaBabiPapua2026
-          </p>
+                <p className="text-[#6a5a3a] text-xs leading-relaxed">{f.desc}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* Bottom mist fade */}
+      <div className="h-px bg-gradient-to-r from-transparent via-amber-900/30 to-transparent" />
+
+      <footer className="py-4 text-center">
+        <p className="text-[#3a3020] text-xs tracking-widest uppercase">
+          Terbuka Untuk Umum · Fee Sukarela
+        </p>
+      </footer>
     </div>
   )
 }

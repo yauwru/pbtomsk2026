@@ -31,38 +31,40 @@ export default function PesanPage() {
   }
 
   return (
-    <div className="min-h-screen tribal-pattern">
-      <div className="bg-gradient-to-b from-green-900 to-green-800 py-10 px-4 text-center shadow">
-        <Link href="/" className="text-green-300 text-sm hover:text-white transition-colors">
+    <div className="min-h-screen relative">
+      <div className="cross-watermark absolute inset-0 pointer-events-none" />
+
+      {/* Header */}
+      <div className="relative border-b border-amber-900/20 py-8 px-4 text-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1f10] to-transparent pointer-events-none" />
+        <Link href="/" className="relative text-amber-600/60 text-xs hover:text-amber-400/80 transition-colors tracking-widest uppercase"
+              style={{ fontFamily: 'var(--font-cinzel)' }}>
           ← Kembali
         </Link>
-        <h1
-          className="text-3xl md:text-4xl font-bold text-white mt-2"
-          style={{ fontFamily: 'var(--font-cinzel)' }}
-        >
-          💬 Pesan & Kesan
+        <h1 className="relative text-2xl md:text-3xl font-bold text-amber-200/90 mt-2"
+            style={{ fontFamily: 'var(--font-cinzel)', textShadow: '0 0 30px rgba(196,154,60,0.2)' }}>
+          Pesan &amp; Kesan
         </h1>
-        <p className="text-green-200 mt-1 text-sm">
+        <p className="relative text-[#6a5a3a] text-xs mt-1 italic">
           Bagikan pendapatmu secara anonim
         </p>
       </div>
 
-      <div className="max-w-xl mx-auto px-4 py-10 flex flex-col gap-8">
+      <div className="max-w-xl mx-auto px-4 py-8 flex flex-col gap-8">
         <MessageForm onSent={handleSent} />
 
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-bold text-stone-700">
-              Pesan dari Peserta
-              <span className="ml-2 text-sm font-normal text-stone-400">
-                ({messages.length})
-              </span>
+            <h2 className="text-amber-300/70 text-xs tracking-widest uppercase"
+                style={{ fontFamily: 'var(--font-cinzel)' }}>
+              Suara Peserta
+              <span className="ml-2 text-amber-700/60">({messages.length})</span>
             </h2>
-            <span className="text-xs text-stone-400">Auto-refresh tiap 15 detik</span>
+            <span className="text-[#3a3020] text-xs">refresh 15 dtk</span>
           </div>
 
           {loading ? (
-            <div className="text-center py-10 text-stone-400">Memuat pesan...</div>
+            <div className="text-center py-12 text-[#4a3a20]">Memuat pesan...</div>
           ) : (
             <MessageList messages={messages} />
           )}

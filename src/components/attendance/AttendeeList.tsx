@@ -26,69 +26,68 @@ export default function AttendeeList({ attendees, onRemoved, onCheckin }: Props)
     try {
       await fetch(`/api/attendees/${id}`, { method: 'DELETE' })
       onRemoved(id)
-    } finally {
-      setRemoving(null)
-    }
+    } finally { setRemoving(null) }
   }
 
   async function toggle(attendee: AttendeeWithSessions, sessionType: SessionTypeName) {
     const key = `${attendee.id}-${sessionType}`
     setToggling(key)
-    const present = attendee.sessions.some((s) => s.sessionType === sessionType)
+    const present = attendee.sessions.some(s => s.sessionType === sessionType)
     try {
-      const method = present ? 'DELETE' : 'POST'
       await fetch(`/api/sessions/${sessionType}/checkin`, {
-        method,
+        method: present ? 'DELETE' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ attendeeId: attendee.id }),
       })
       onCheckin(attendee.id, sessionType, !present)
-    } finally {
-      setToggling(null)
-    }
+    } finally { setToggling(null) }
   }
 
   if (attendees.length === 0) {
-    return (
-      <p className="text-center text-stone-400 py-8">Belum ada peserta terdaftar.</p>
-    )
+    return <p className="text-center text-[#4a3a20] py-10 italic text-sm">Belum ada peserta terdaftar.</p>
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-amber-200">
-      <table className="w-full text-sm">
-        <thead className="bg-amber-100">
-          <tr>
-            <th className="px-4 py-3 text-left text-stone-700">No</th>
-            <th className="px-4 py-3 text-left text-stone-700">Nama</th>
-            {SESSIONS.map((s) => (
-              <th key={s} className="px-4 py-3 text-center text-stone-700">{SESSION_SHORT[s]}</th>
+    <div className="overflow-x-auto rounded-xl border border-amber-900/20">
+      <table className="w-full text-xs">
+        <thead>
+          <tr className="bg-[#0d1a08]/80">
+            <th className="px-4 py-3 text-left text-amber-600/60 tracking-widest uppercase font-semibold"
+                style={{ fontFamily: 'var(--font-cinzel)' }}>No</th>
+            <th className="px-4 py-3 text-left text-amber-600/60 tracking-widest uppercase font-semibold"
+                style={{ fontFamily: 'var(--font-cinzel)' }}>Nama</th>
+            {SESSIONS.map(s => (
+              <th key={s} className="px-4 py-3 text-center text-amber-600/60 tracking-widest uppercase font-semibold"
+                  style={{ fontFamily: 'var(--font-cinzel)' }}>{SESSION_SHORT[s]}</th>
             ))}
-            <th className="px-4 py-3 text-center text-stone-700">Status</th>
-            <th className="px-4 py-3 text-center text-stone-700">Hapus</th>
+            <th className="px-4 py-3 text-center text-amber-600/60 tracking-widest uppercase font-semibold"
+                style={{ fontFamily: 'var(--font-cinzel)' }}>Status</th>
+            <th className="px-4 py-3"></th>
           </tr>
         </thead>
         <tbody>
           {attendees.map((a, idx) => {
-            const sessionCount = a.sessions.length
-            const isEligible = sessionCount === 3
+            const count = a.sessions.length
+            const eligible = count === 3
             return (
-              <tr key={a.id} className={`border-t border-amber-100 ${isEligible ? 'bg-green-50' : 'bg-white'}`}>
-                <td className="px-4 py-3 text-stone-500">{idx + 1}</td>
-                <td className="px-4 py-3 font-medium text-stone-800">
+              <tr key={a.id}
+                  className={`border-t border-amber-900/10 transition-colors
+                    ${eligible ? 'bg-green-950/20' : 'bg-transparent hover:bg-white/2'}`}>
+                <td className="px-4 py-3 text-[#4a3a20]">{idx + 1}</td>
+                <td className="px-4 py-3 text-amber-200/80 font-medium">
                   {a.name}
-                  {isEligible && <span className="ml-2">⭐</span>}
+                  {eligible && <span className="ml-1.5 text-amber-500">★</span>}
                 </td>
-                {SESSIONS.map((s) => {
+                {SESSIONS.map(s => {
                   const key = `${a.id}-${s}`
-                  const present = a.sessions.some((sr) => sr.sessionType === s)
+                  const present = a.sessions.some(sr => sr.sessionType === s)
                   return (
                     <td key={s} className="px-4 py-3 text-center">
                       <button
                         onClick={() => toggle(a, s)}
                         disabled={toggling === key}
-                        className="text-xl leading-none disabled:opacity-50 cursor-pointer hover:scale-110 transition-transform"
-                        title={present ? 'Klik untuk batalkan' : 'Klik untuk tandai hadir'}
+                        className="text-lg leading-none disabled:opacity-40 cursor-pointer hover:scale-110 transition-transform"
+                        title={present ? 'Batalkan' : 'Tandai hadir'}
                       >
                         {toggling === key ? '⏳' : present ? '✅' : '⬜'}
                       </button>
@@ -96,21 +95,16 @@ export default function AttendeeList({ attendees, onRemoved, onCheckin }: Props)
                   )
                 })}
                 <td className="px-4 py-3 text-center">
-                  <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
-                    isEligible
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-stone-100 text-stone-500'
-                  }`}>
-                    {isEligible ? 'Eligible' : `${sessionCount}/3`}
+                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full tracking-wider
+                    ${eligible
+                      ? 'bg-green-900/40 text-green-400/80 border border-green-800/30'
+                      : 'bg-amber-900/20 text-[#5a4a30] border border-amber-900/20'}`}
+                        style={{ fontFamily: 'var(--font-cinzel)' }}>
+                    {eligible ? 'Eligible' : `${count}/3`}
                   </span>
                 </td>
                 <td className="px-4 py-3 text-center">
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    loading={removing === a.id}
-                    onClick={() => remove(a.id)}
-                  >
+                  <Button variant="danger" size="sm" loading={removing === a.id} onClick={() => remove(a.id)}>
                     Hapus
                   </Button>
                 </td>

@@ -12,15 +12,11 @@ function timeAgo(dateStr: string): string {
   return `${Math.floor(hours / 24)} hari lalu`
 }
 
-interface Props {
-  message: Message
-}
-
-export default function MessageCard({ message }: Props) {
+export default function MessageCard({ message }: { message: Message }) {
   return (
-    <div className="bg-white border border-amber-100 rounded-xl px-5 py-4 shadow-sm hover:shadow-md transition-shadow">
-      <p className="text-stone-700 text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
-      <p className="text-xs text-stone-400 mt-2 text-right">{timeAgo(message.createdAt)}</p>
+    <div className="panel rounded-xl px-5 py-4 border border-amber-900/15 hover:border-amber-800/25 transition-all">
+      <p className="text-amber-100/70 text-sm leading-relaxed whitespace-pre-wrap italic">&ldquo;{message.content}&rdquo;</p>
+      <p className="text-[#3a3020] text-xs mt-2 text-right">{timeAgo(message.createdAt)}</p>
     </div>
   )
 }

@@ -34,41 +34,40 @@ export default function TwibonPage() {
   }
 
   return (
-    <div className="min-h-screen tribal-pattern">
-      <div className="bg-gradient-to-b from-amber-700 to-amber-600 py-10 px-4 text-center shadow">
-        <Link href="/" className="text-amber-200 text-sm hover:text-white transition-colors">
+    <div className="min-h-screen relative">
+      <div className="cross-watermark absolute inset-0 pointer-events-none" />
+
+      {/* Header */}
+      <div className="relative border-b border-amber-900/20 py-8 px-4 text-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f1f0a] to-transparent pointer-events-none" />
+        <Link href="/" className="relative text-amber-600/60 text-xs hover:text-amber-400/80 transition-colors tracking-widest uppercase"
+              style={{ fontFamily: 'var(--font-cinzel)' }}>
           ← Kembali
         </Link>
-        <h1
-          className="text-3xl md:text-4xl font-bold text-white mt-2"
-          style={{ fontFamily: 'var(--font-cinzel)' }}
-        >
+        <h1 className="relative text-2xl md:text-3xl font-bold text-amber-200/90 mt-2"
+            style={{ fontFamily: 'var(--font-cinzel)', textShadow: '0 0 30px rgba(196,154,60,0.2)' }}>
           📸 Foto Twibon
         </h1>
-        <p className="text-amber-200 mt-1 text-sm">
-          Pesta Babi Papua 2026 · Tomsk, Rusia
+        <p className="relative text-[#6a5a3a] text-xs mt-1 tracking-wider">
+          Pesta Babi Papua 2026 · Tomsk, Rusia · IG Story 1080×1920
         </p>
       </div>
 
-      <div className="max-w-xl mx-auto px-4 py-10">
-        {/* Processing — canvas works in background */}
-        {sourceImage && mode !== 'done' && (
-          <TwibonCanvas sourceImage={sourceImage} onComposited={handleComposited} />
-        )}
+      {/* Canvas (hidden, does compositing) */}
+      {sourceImage && mode !== 'done' && (
+        <TwibonCanvas sourceImage={sourceImage} onComposited={handleComposited} />
+      )}
 
+      <div className="max-w-sm mx-auto px-4 py-10">
         {mode === 'choose' && (
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-5">
             <TwibonUpload onImage={handleImage} />
-            <div className="relative text-center">
-              <div className="absolute inset-x-0 top-1/2 border-t border-stone-200" />
-              <span className="relative bg-[#FDF6E3] px-3 text-stone-400 text-sm">atau</span>
+            <div className="flex items-center gap-3">
+              <div className="flex-1 h-px bg-amber-900/20" />
+              <span className="text-[#4a3a20] text-xs tracking-widest">ATAU</span>
+              <div className="flex-1 h-px bg-amber-900/20" />
             </div>
-            <Button
-              variant="secondary"
-              size="lg"
-              className="w-full"
-              onClick={() => setMode('camera')}
-            >
+            <Button variant="secondary" size="lg" className="w-full" onClick={() => setMode('camera')}>
               📷 Buka Kamera
             </Button>
           </div>
@@ -79,9 +78,9 @@ export default function TwibonPage() {
         )}
 
         {mode === 'processing' && (
-          <div className="text-center py-16 text-stone-500">
-            <div className="text-4xl animate-spin inline-block mb-4">⚙️</div>
-            <p className="font-medium">Menambahkan frame twibon...</p>
+          <div className="text-center py-20">
+            <div className="text-4xl animate-spin inline-block mb-4 text-amber-600">✝</div>
+            <p className="text-[#8a7a5a] text-sm tracking-wider">Menambahkan frame...</p>
           </div>
         )}
 

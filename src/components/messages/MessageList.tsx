@@ -3,25 +3,18 @@
 import { Message } from '@/types'
 import MessageCard from './MessageCard'
 
-interface Props {
-  messages: Message[]
-}
-
-export default function MessageList({ messages }: Props) {
+export default function MessageList({ messages }: { messages: Message[] }) {
   if (messages.length === 0) {
     return (
-      <div className="text-center py-12 text-stone-400">
-        <p className="text-4xl mb-3">💬</p>
-        <p>Belum ada pesan. Jadilah yang pertama!</p>
+      <div className="text-center py-12 text-[#3a3020]">
+        <p className="text-3xl mb-3 opacity-40">✝</p>
+        <p className="italic text-sm">Belum ada pesan. Jadilah yang pertama.</p>
       </div>
     )
   }
-
   return (
     <div className="flex flex-col gap-3">
-      {messages.map((m) => (
-        <MessageCard key={m.id} message={m} />
-      ))}
+      {messages.map(m => <MessageCard key={m.id} message={m} />)}
     </div>
   )
 }

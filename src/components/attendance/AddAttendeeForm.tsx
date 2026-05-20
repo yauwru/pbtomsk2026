@@ -19,7 +19,6 @@ export default function AddAttendeeForm({ onAdded }: Props) {
     if (!name.trim()) return
     setError('')
     setLoading(true)
-
     try {
       const res = await fetch('/api/attendees', {
         method: 'POST',
@@ -27,16 +26,9 @@ export default function AddAttendeeForm({ onAdded }: Props) {
         body: JSON.stringify({ name }),
       })
       const data = await res.json()
-
-      if (!res.ok) {
-        setError(data.error ?? 'Gagal menambahkan peserta')
-      } else {
-        onAdded(data)
-        setName('')
-      }
-    } finally {
-      setLoading(false)
-    }
+      if (!res.ok) setError(data.error ?? 'Gagal menambahkan')
+      else { onAdded(data); setName('') }
+    } finally { setLoading(false) }
   }
 
   return (
@@ -46,13 +38,11 @@ export default function AddAttendeeForm({ onAdded }: Props) {
           label="Nama Peserta"
           placeholder="Masukkan nama lengkap..."
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={e => setName(e.target.value)}
           error={error}
         />
       </div>
-      <Button type="submit" loading={loading} className="mb-[1px]">
-        + Tambah
-      </Button>
+      <Button type="submit" loading={loading}>+ Tambah</Button>
     </form>
   )
 }

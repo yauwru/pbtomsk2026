@@ -28,126 +28,100 @@ export default function AdminDashboard() {
         fetch('/api/raffle/eligible'),
         fetch('/api/raffle/winner'),
       ])
-
-      if (attendeesRes.status === 401) {
-        setAuthError(true)
-        return
-      }
-
-      const attendeesData = await attendeesRes.json()
-      const eligibleData = eligibleRes.ok ? await eligibleRes.json() : []
-      const winnerData = winnerRes.ok ? await winnerRes.json() : null
-
-      setAttendees(attendeesData)
-      setEligible(eligibleData)
-      setWinner(winnerData)
+      if (attendeesRes.status === 401) { setAuthError(true); return }
+      setAttendees(await attendeesRes.json())
+      setEligible(eligibleRes.ok ? await eligibleRes.json() : [])
+      setWinner(winnerRes.ok ? await winnerRes.json() : null)
     } finally {
       setLoading(false)
     }
   }, [])
 
-  useEffect(() => {
-    fetchAll()
-  }, [fetchAll])
+  useEffect(() => { fetchAll() }, [fetchAll])
 
   async function logout() {
     await fetch('/api/auth/logout', { method: 'POST' })
     router.push('/admin')
   }
 
-  function handleAdded(attendee: AttendeeWithSessions) {
-    setAttendees((prev) => [...prev, attendee])
-  }
-
+  function handleAdded(a: AttendeeWithSessions) { setAttendees(prev => [...prev, a]) }
   function handleRemoved(id: string) {
-    setAttendees((prev) => prev.filter((a) => a.id !== id))
-    setEligible((prev) => prev.filter((a) => a.id !== id))
+    setAttendees(prev => prev.filter(a => a.id !== id))
+    setEligible(prev => prev.filter(a => a.id !== id))
   }
-
   function handleCheckin(attendeeId: string, sessionType: SessionTypeName, present: boolean) {
-    setAttendees((prev) =>
-      prev.map((a) => {
-        if (a.id !== attendeeId) return a
-        const sessions = present
-          ? [...a.sessions, { id: `tmp-${Date.now()}`, sessionType, checkedAt: new Date().toISOString() }]
-          : a.sessions.filter((s) => s.sessionType !== sessionType)
-        return { ...a, sessions }
-      })
-    )
-    // Refresh eligible list after toggle
-    fetch('/api/raffle/eligible')
-      .then((r) => r.json())
-      .then(setEligible)
-      .catch(() => {})
+    setAttendees(prev => prev.map(a => {
+      if (a.id !== attendeeId) return a
+      const sessions = present
+        ? [...a.sessions, { id: `tmp-${Date.now()}`, sessionType, checkedAt: new Date().toISOString() }]
+        : a.sessions.filter(s => s.sessionType !== sessionType)
+      return { ...a, sessions }
+    }))
+    fetch('/api/raffle/eligible').then(r => r.json()).then(setEligible).catch(() => {})
   }
-
   function handleWinnerSaved(w: { attendeeId: string; attendeeName: string }) {
     setWinner({ ...w, id: '', drawnAt: new Date().toISOString() })
   }
 
-  if (authError) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="text-center">
-          <p className="text-red-600 font-semibold mb-4">Sesi habis atau tidak terautentikasi.</p>
-          <Link href="/admin">
-            <Button>Login Ulang</Button>
-          </Link>
-        </div>
+  if (authError) return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center panel rounded-2xl p-8 border border-red-900/30">
+        <p className="text-red-400/80 mb-4 text-sm">Sesi habis atau tidak terautentikasi.</p>
+        <Link href="/admin"><Button>Login Ulang</Button></Link>
       </div>
-    )
-  }
+    </div>
+  )
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-stone-400">Memuat data...</p>
-      </div>
-    )
-  }
+  if (loading) return (
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="text-[#4a3a20] animate-pulse text-sm tracking-widest">Memuat data...</p>
+    </div>
+  )
 
-  const eligibleCount = attendees.filter((a) => a.sessions.length === 3).length
+  const eligibleCount = attendees.filter(a => a.sessions.length === 3).length
 
   return (
-    <div className="min-h-screen tribal-pattern">
+    <div className="min-h-screen relative">
+      <div className="cross-watermark absolute inset-0 pointer-events-none" />
+
       {/* Header */}
-      <div className="bg-gradient-to-b from-red-900 to-red-800 py-8 px-4 shadow">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
+      <div className="relative border-b border-amber-900/20 py-6 px-4">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0d1a08] to-transparent pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto flex items-center justify-between">
           <div>
-            <Link href="/" className="text-red-300 text-xs hover:text-white">← Beranda</Link>
-            <h1
-              className="text-2xl font-bold text-white mt-1"
-              style={{ fontFamily: 'var(--font-cinzel)' }}
-            >
-              Panel Admin
+            <Link href="/" className="text-amber-700/40 text-xs hover:text-amber-600/60 tracking-widest uppercase"
+                  style={{ fontFamily: 'var(--font-cinzel)' }}>
+              ← Beranda
+            </Link>
+            <h1 className="text-lg font-bold text-amber-200/80 mt-0.5"
+                style={{ fontFamily: 'var(--font-cinzel)' }}>
+              Panel Panitia
             </h1>
-            <p className="text-red-300 text-xs mt-0.5">
-              {attendees.length} peserta · {eligibleCount} eligible
+            <p className="text-[#5a4a30] text-xs">
+              {attendees.length} peserta · {eligibleCount} eligible undian
             </p>
           </div>
-          <Button variant="ghost" size="sm" onClick={logout}>
-            Keluar
-          </Button>
+          <Button variant="ghost" size="sm" onClick={logout}>Keluar</Button>
         </div>
       </div>
 
       {/* Tabs */}
       <div className="max-w-4xl mx-auto px-4">
-        <div className="flex border-b border-amber-200 mt-6">
+        <div className="flex border-b border-amber-900/20 mt-6">
           {([
             { key: 'peserta', label: '👥 Peserta & Absensi' },
-            { key: 'undian', label: '🎰 Undian' },
-          ] as { key: Tab; label: string }[]).map((t) => (
+            { key: 'undian', label: '✝ Undian' },
+          ] as { key: Tab; label: string }[]).map(t => (
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
               className={`
-                px-5 py-3 text-sm font-semibold border-b-2 transition-colors
+                px-5 py-3 text-xs font-semibold border-b-2 transition-colors tracking-wider
                 ${tab === t.key
-                  ? 'border-red-700 text-red-800'
-                  : 'border-transparent text-stone-500 hover:text-stone-700'
-                }
+                  ? 'border-amber-600/70 text-amber-300/90'
+                  : 'border-transparent text-[#5a4a30] hover:text-[#8a7a5a]'}
               `}
+              style={{ fontFamily: 'var(--font-cinzel)' }}
             >
               {t.label}
             </button>
@@ -158,14 +132,9 @@ export default function AdminDashboard() {
           {tab === 'peserta' && (
             <div className="flex flex-col gap-6">
               <AddAttendeeForm onAdded={handleAdded} />
-              <AttendeeList
-                attendees={attendees}
-                onRemoved={handleRemoved}
-                onCheckin={handleCheckin}
-              />
+              <AttendeeList attendees={attendees} onRemoved={handleRemoved} onCheckin={handleCheckin} />
             </div>
           )}
-
           {tab === 'undian' && (
             <div className="flex flex-col gap-6">
               <EligibleList eligible={eligible} />

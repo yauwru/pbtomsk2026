@@ -1,32 +1,34 @@
 import type { Metadata } from 'next'
-import { Cinzel, Inter } from 'next/font/google'
+import { Cinzel, Lora } from 'next/font/google'
 import './globals.css'
 
 const cinzel = Cinzel({
   variable: '--font-cinzel',
   subsets: ['latin'],
-  weight: ['400', '700', '900'],
+  weight: ['400', '600', '700', '900'],
 })
 
-const inter = Inter({
-  variable: '--font-inter',
+const lora = Lora({
+  variable: '--font-lora',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
 })
 
 export const metadata: Metadata = {
-  title: 'Nonton Bareng Film Pesta Babi — Tomsk 2026',
-  description: 'Nonton Bareng Film Pesta Babi — Komunitas Papua di Tomsk, Rusia 2026. #papuabukantanahkosong',
+  title: 'Nobar Pesta Babi — Tomsk 2026',
+  description: 'Nonton Bareng Film "Pesta Babi: Kolonialisme di Zaman Kita" — Tomsk, Rusia · 23 Mei 2026 · #papuabukantanahkosong',
   openGraph: {
-    title: 'Nonton Bareng Film Pesta Babi — Tomsk 2026',
-    description: 'Acara nonton bareng komunitas Papua di Tomsk, Rusia. #papuabukantanahkosong',
+    title: 'Nobar Pesta Babi — Tomsk 2026',
+    description: 'Film Pesta Babi: Membaca Krisis Ekologi, Konflik Agraria, dan Ruang Hidup Masyarakat Adat Papua. Tomsk, Rusia.',
     type: 'website',
   },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${cinzel.variable} ${inter.variable}`}>
-      <body className="min-h-screen font-[var(--font-inter)] bg-[#FDF6E3] text-[#2C1810]">
+    <html lang="id" className={`${cinzel.variable} ${lora.variable}`}>
+      <body>
         {children}
       </body>
     </html>
