@@ -1,17 +1,13 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import TwibonUpload from '@/components/twibon/TwibonUpload'
 import TwibonCanvas from '@/components/twibon/TwibonCanvas'
 import TwibonResult from '@/components/twibon/TwibonResult'
-import Button from '@/components/ui/Button'
 import CrossIcon from '@/components/ui/CrossIcon'
 
-const TwibonCamera = dynamic(() => import('@/components/twibon/TwibonCamera'), { ssr: false })
-
-type Mode = 'choose' | 'camera' | 'processing' | 'done'
+type Mode = 'choose' | 'processing' | 'done'
 
 export default function TwibonPage() {
   const [mode, setMode] = useState<Mode>('choose')
@@ -61,27 +57,13 @@ export default function TwibonPage() {
 
       <div className="max-w-sm mx-auto px-4 py-10">
         {mode === 'choose' && (
-          <div className="flex flex-col gap-5">
-            <TwibonUpload onImage={handleImage} />
-            <div className="flex items-center gap-3">
-              <div className="flex-1 h-px bg-amber-900/20" />
-              <span className="text-amber-700/60 text-xs tracking-widest">ATAU</span>
-              <div className="flex-1 h-px bg-amber-900/20" />
-            </div>
-            <Button variant="secondary" size="lg" className="w-full" onClick={() => setMode('camera')}>
-              📷 Buka Kamera
-            </Button>
-          </div>
-        )}
-
-        {mode === 'camera' && (
-          <TwibonCamera onCapture={handleImage} onCancel={() => setMode('choose')} />
+          <TwibonUpload onImage={handleImage} />
         )}
 
         {mode === 'processing' && (
           <div className="text-center py-20">
             <CrossIcon className="w-8 h-10 animate-spin inline-block mb-4 text-amber-600" />
-            <p className="text-[#8a7a5a] text-sm tracking-wider">Menambahkan frame...</p>
+            <p className="text-amber-700/60 text-sm tracking-wider">Menambahkan frame...</p>
           </div>
         )}
 
