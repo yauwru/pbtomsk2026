@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Attendee {
+  id        String          @id @default(cuid())
+  name      String          @unique
+  createdAt DateTime        @default(now())
+  sessions  SessionRecord[]
+}
+
+model SessionRecord {
+  id          String      @id @default(cuid())
+  attendeeId  String
+  sessionType SessionType
+  checkedAt   DateTime    @default(now())
+  attendee    Attendee    @relation(fields: [attendeeId], references: [id], onDelete: Cascade)
+
+  @@unique([attendeeId, sessionType])
+}
+
+enum SessionType {
+  CHECK_IN
+  MID_FILM
+  END_FILM
+}
+
+model RaffleWinner {
+  id           String   @id @default(cuid())
+  attendeeId   String   @unique
+  attendeeName String
+  drawnAt      DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+}
