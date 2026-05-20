@@ -9,9 +9,10 @@ import EligibleList from '@/components/raffle/EligibleList'
 import RaffleSpinner from '@/components/raffle/RaffleSpinner'
 import Button from '@/components/ui/Button'
 import CrossIcon from '@/components/ui/CrossIcon'
+import BankAccountManager from '@/components/admin/BankAccountManager'
 import { AttendeeWithSessions, SessionTypeName, RaffleWinner } from '@/types'
 
-type Tab = 'peserta' | 'undian'
+type Tab = 'peserta' | 'undian' | 'bank'
 
 export default function AdminDashboard() {
   const [tab, setTab] = useState<Tab>('peserta')
@@ -112,6 +113,7 @@ export default function AdminDashboard() {
           {([
             { key: 'peserta', label: '👥 Peserta & Absensi' },
             { key: 'undian', label: '† Undian' },
+            { key: 'bank', label: '🤝 Rekening' },
           ] as { key: Tab; label: string }[]).map(t => (
             <button
               key={t.key}
@@ -145,6 +147,9 @@ export default function AdminDashboard() {
                 onWinnerSaved={handleWinnerSaved}
               />
             </div>
+          )}
+          {tab === 'bank' && (
+            <BankAccountManager />
           )}
         </div>
       </div>
