@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from 'react'
 
+const W = 1080
+const H = 1920
+
 interface Props {
   sourceImage: string
   onComposited: (dataUrl: string) => void
@@ -16,28 +19,29 @@ export default function TwibonCanvas({ sourceImage, onComposited }: Props) {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    const SIZE = 800
-    canvas.width = SIZE
-    canvas.height = SIZE
+    canvas.width = W
+    canvas.height = H
 
     const userImg = new Image()
     const frameImg = new Image()
 
     userImg.onload = () => {
-      const srcSize = Math.min(userImg.width, userImg.height)
-      const srcX = (userImg.width - srcSize) / 2
-      const srcY = (userImg.height - srcSize) / 2
-      ctx.drawImage(userImg, srcX, srcY, srcSize, srcSize, 0, 0, SIZE, SIZE)
+      // Cover-fill: scale photo to fill 1080×1920, center-crop
+      const scale = Math.max(W / userImg.width, H / userImg.height)
+      const drawW = userImg.width * scale
+      const drawH = userImg.height * scale
+      const dx = (W - drawW) / 2
+      const dy = (H - drawH) / 2
+      ctx.drawImage(userImg, dx, dy, drawW, drawH)
       frameImg.src = '/frame-twibon.png'
     }
 
     frameImg.onload = () => {
-      ctx.drawImage(frameImg, 0, 0, SIZE, SIZE)
+      ctx.drawImage(frameImg, 0, 0, W, H)
       onComposited(canvas.toDataURL('image/png'))
     }
 
     frameImg.onerror = () => {
-      // Frame not found — still export the photo
       onComposited(canvas.toDataURL('image/png'))
     }
 

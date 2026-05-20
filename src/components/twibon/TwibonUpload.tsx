@@ -49,7 +49,7 @@ export default function TwibonUpload({ onImage }: Props) {
       <Button variant="secondary" size="sm" type="button">
         Pilih Foto dari Galeri
       </Button>
-      <p className="text-xs text-stone-400 mt-3">JPG, PNG, WEBP — Foto terbaik: format persegi</p>
+      <p className="text-xs text-stone-400 mt-3">JPG, PNG, WEBP · Hasil: 1080×1920 px (IG Story)</p>
     </div>
   )
 }

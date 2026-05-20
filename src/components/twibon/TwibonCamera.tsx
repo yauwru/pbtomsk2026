@@ -20,12 +20,14 @@ export default function TwibonCamera({ onCapture, onCancel }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="w-full max-w-sm rounded-2xl overflow-hidden shadow-lg border-2 border-amber-300 aspect-square bg-stone-900">
+      {/* 9:16 portrait container */}
+      <div className="w-64 rounded-2xl overflow-hidden shadow-lg border-2 border-amber-300 bg-stone-900"
+           style={{ aspectRatio: '9/16' }}>
         <Webcam
           ref={webcamRef}
           audio={false}
           screenshotFormat="image/png"
-          videoConstraints={{ facingMode: 'user', aspectRatio: 1 }}
+          videoConstraints={{ facingMode: 'user', aspectRatio: 9 / 16 }}
           playsInline
           onUserMedia={() => setReady(true)}
           className="w-full h-full object-cover"

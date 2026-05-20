@@ -2,8 +2,7 @@
 
 import Button from '@/components/ui/Button'
 
-const HASHTAG = '#papuabukantanahkosong'
-const CAPTION = `Hadir di Nonton Bareng Film Pesta Babi 🇮🇩🐷\nTomsk, Rusia 2026\n\n${HASHTAG} #PestaBabiPapua2026 #PapuaTomsk`
+const CAPTION = `Hadir di Nonton Bareng Film Pesta Babi 🇮🇩🐷\nTomsk, Rusia 2026\n\n#papuabukantanahkosong #PestaBabiPapua2026 #PapuaTomsk`
 
 interface Props {
   dataUrl: string
@@ -25,17 +24,21 @@ export default function TwibonResult({ dataUrl, onReset }: Props) {
 
   return (
     <div className="flex flex-col items-center gap-5">
-      <div className="relative">
+      {/* Preview — Instagram Story 9:16 */}
+      <div className="w-56 rounded-2xl overflow-hidden shadow-xl border-4 border-amber-400"
+           style={{ aspectRatio: '9/16' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={dataUrl}
-          alt="Twibon Pesta Babi Papua 2026"
-          className="w-72 h-72 md:w-96 md:h-96 rounded-2xl shadow-xl object-cover border-4 border-amber-400"
+          alt="Twibon IG Story Pesta Babi Papua 2026"
+          className="w-full h-full object-cover"
         />
       </div>
 
+      <p className="text-xs text-stone-400">1080 × 1920 px · siap upload IG Story</p>
+
       <div className="bg-amber-100 border border-amber-300 rounded-xl p-4 max-w-sm w-full text-center">
-        <p className="text-xs text-stone-500 mb-1">Salin caption untuk IG/WA:</p>
+        <p className="text-xs text-stone-500 mb-1">Caption untuk IG Story / WA:</p>
         <p className="text-sm text-stone-700 whitespace-pre-line font-medium">{CAPTION}</p>
       </div>
 
