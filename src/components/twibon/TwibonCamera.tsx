@@ -18,7 +18,11 @@ export default function TwibonCamera({ onCapture, onCancel }: Props) {
           ref={webcamRef}
           audio={false}
           screenshotFormat="image/png"
-          videoConstraints={{ facingMode: 'user', aspectRatio: 9 / 16 }}
+          videoConstraints={{
+            facingMode: 'user',
+            width: { ideal: 720 },
+            height: { ideal: 1280 },
+          }}
           playsInline
           onUserMedia={() => setReady(true)}
           className="w-full h-full object-cover"
