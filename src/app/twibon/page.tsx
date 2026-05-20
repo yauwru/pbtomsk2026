@@ -48,7 +48,7 @@ export default function TwibonPage() {
             style={{ fontFamily: 'var(--font-cinzel)', textShadow: '0 0 30px rgba(196,154,60,0.2)' }}>
           📸 Foto Twibon
         </h1>
-        <p className="relative text-[#6a5a3a] text-xs mt-1 tracking-wider">
+        <p className="relative text-amber-600/70 text-xs mt-1 tracking-wider">
           Pesta Babi Papua 2026 · Tomsk, Rusia · IG Story 1080×1920
         </p>
       </div>
@@ -64,7 +64,7 @@ export default function TwibonPage() {
             <TwibonUpload onImage={handleImage} />
             <div className="flex items-center gap-3">
               <div className="flex-1 h-px bg-amber-900/20" />
-              <span className="text-[#4a3a20] text-xs tracking-widest">ATAU</span>
+              <span className="text-amber-700/60 text-xs tracking-widest">ATAU</span>
               <div className="flex-1 h-px bg-amber-900/20" />
             </div>
             <Button variant="secondary" size="lg" className="w-full" onClick={() => setMode('camera')}>

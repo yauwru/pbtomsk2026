@@ -95,7 +95,7 @@ export default function RaffleSpinner({ eligible, existingWinner, onWinnerSaved 
         <Button variant="secondary" onClick={() => setShowWinner(true)}>★ Lihat Pemenang</Button>
       )}
       {!eligible.length && (
-        <p className="text-[#3a3020] text-xs italic text-center max-w-xs">
+        <p className="text-amber-700/70 text-xs italic text-center max-w-xs">
           Belum ada peserta eligible. Lakukan absensi 3 sesi terlebih dahulu.
         </p>
       )}

@@ -29,11 +29,11 @@ export default function TwibonResult({ dataUrl, onReset }: Props) {
              className="w-full h-full object-cover" />
       </div>
 
-      <p className="text-[#3a3020] text-xs tracking-wider">1080 × 1920 px · IG Story</p>
+      <p className="text-amber-700/60 text-xs tracking-wider">1080 × 1920 px · IG Story</p>
 
       {/* Caption box */}
       <div className="panel rounded-xl p-4 border border-amber-900/20 max-w-xs w-full text-center">
-        <p className="text-[#4a3a20] text-[10px] mb-2 tracking-wider uppercase"
+        <p className="text-amber-700/70 text-[10px] mb-2 tracking-wider uppercase"
            style={{ fontFamily: 'var(--font-cinzel)' }}>Caption IG Story / WA</p>
         <p className="text-amber-200/60 text-xs whitespace-pre-line italic">{CAPTION}</p>
       </div>

@@ -77,7 +77,7 @@ export default function Home() {
           <p className="text-[#8a7a5a] text-sm italic mt-3 mb-1">
             Kolonialisme di Zaman Kita
           </p>
-          <p className="text-[#6a5a3a] text-xs leading-relaxed max-w-xs mx-auto">
+          <p className="text-amber-600/70 text-xs leading-relaxed max-w-xs mx-auto">
             Membaca Krisis Ekologi, Konflik Agraria, dan Ruang Hidup Masyarakat Adat Papua
           </p>
 
@@ -117,7 +117,7 @@ export default function Home() {
                     style={{ fontFamily: 'var(--font-cinzel)' }}>
                   {f.title}
                 </h3>
-                <p className="text-[#6a5a3a] text-xs leading-relaxed">{f.desc}</p>
+                <p className="text-amber-600/70 text-xs leading-relaxed">{f.desc}</p>
               </Link>
             ))}
           </div>
@@ -128,7 +128,7 @@ export default function Home() {
       <div className="h-px bg-gradient-to-r from-transparent via-amber-900/30 to-transparent" />
 
       <footer className="py-4 text-center">
-        <p className="text-[#3a3020] text-xs tracking-widest uppercase">
+        <p className="text-amber-700/60 text-xs tracking-widest uppercase">
           Terbuka Untuk Umum · Fee Sukarela
         </p>
       </footer>

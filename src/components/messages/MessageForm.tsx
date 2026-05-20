@@ -48,13 +48,13 @@ export default function MessageForm({ onSent }: Props) {
         rows={4}
         className="w-full px-4 py-3 rounded-xl border
           bg-[#0a130a]/60 backdrop-blur-sm
-          text-amber-100/80 placeholder-[#3a3020] resize-none
+          text-amber-100/80 placeholder-amber-700/50 resize-none
           border-amber-900/25 focus:border-amber-700/40
           focus:ring-1 focus:ring-amber-900/30
           outline-none transition-all text-sm italic"
       />
       <div className="flex items-center justify-between mt-2">
-        <span className="text-[#3a3020] text-xs">{content.length}/500</span>
+        <span className="text-amber-700/60 text-xs">{content.length}/500</span>
         {error && <p className="text-xs text-red-400/70">{error}</p>}
       </div>
       {sent && <p className="text-xs text-green-500/70 mt-1">✓ Pesan terkirim. Terima kasih.</p>}

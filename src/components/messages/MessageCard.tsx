@@ -16,7 +16,7 @@ export default function MessageCard({ message }: { message: Message }) {
   return (
     <div className="panel rounded-xl px-5 py-4 border border-amber-900/15 hover:border-amber-800/25 transition-all">
       <p className="text-amber-100/70 text-sm leading-relaxed whitespace-pre-wrap italic">&ldquo;{message.content}&rdquo;</p>
-      <p className="text-[#3a3020] text-xs mt-2 text-right">{timeAgo(message.createdAt)}</p>
+      <p className="text-amber-700/60 text-xs mt-2 text-right">{timeAgo(message.createdAt)}</p>
     </div>
   )
 }

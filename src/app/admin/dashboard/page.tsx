@@ -74,7 +74,7 @@ export default function AdminDashboard() {
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center">
-      <p className="text-[#4a3a20] animate-pulse text-sm tracking-widest">Memuat data...</p>
+      <p className="text-amber-700/70 animate-pulse text-sm tracking-widest">Memuat data...</p>
     </div>
   )
 
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
                 style={{ fontFamily: 'var(--font-cinzel)' }}>
               Panel Panitia
             </h1>
-            <p className="text-[#5a4a30] text-xs">
+            <p className="text-amber-700/60 text-xs">
               {attendees.length} peserta · {eligibleCount} eligible undian
             </p>
           </div>
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
                 px-5 py-3 text-xs font-semibold border-b-2 transition-colors tracking-wider
                 ${tab === t.key
                   ? 'border-amber-600/70 text-amber-300/90'
-                  : 'border-transparent text-[#5a4a30] hover:text-[#8a7a5a]'}
+                  : 'border-transparent text-amber-700/60 hover:text-amber-500/80'}
               `}
               style={{ fontFamily: 'var(--font-cinzel)' }}
             >
