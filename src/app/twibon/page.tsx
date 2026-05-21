@@ -3,11 +3,10 @@
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import TwibonUpload from '@/components/twibon/TwibonUpload'
-import TwibonCanvas from '@/components/twibon/TwibonCanvas'
+import TwibonEditor from '@/components/twibon/TwibonEditor'
 import TwibonResult from '@/components/twibon/TwibonResult'
-import CrossIcon from '@/components/ui/CrossIcon'
 
-type Mode = 'choose' | 'processing' | 'done'
+type Mode = 'choose' | 'editing' | 'done'
 
 export default function TwibonPage() {
   const [mode, setMode] = useState<Mode>('choose')
@@ -16,7 +15,7 @@ export default function TwibonPage() {
 
   const handleImage = useCallback((dataUrl: string) => {
     setSourceImage(dataUrl)
-    setMode('processing')
+    setMode('editing')
   }, [])
 
   const handleComposited = useCallback((dataUrl: string) => {
@@ -50,21 +49,17 @@ export default function TwibonPage() {
         </p>
       </div>
 
-      {/* Canvas (hidden, does compositing) */}
-      {sourceImage && mode !== 'done' && (
-        <TwibonCanvas sourceImage={sourceImage} onComposited={handleComposited} />
-      )}
-
       <div className="max-w-sm mx-auto px-4 py-10">
         {mode === 'choose' && (
           <TwibonUpload onImage={handleImage} />
         )}
 
-        {mode === 'processing' && (
-          <div className="text-center py-20">
-            <CrossIcon className="w-8 h-10 animate-spin inline-block mb-4 text-amber-600" />
-            <p className="text-amber-700/60 text-sm tracking-wider">Menambahkan frame...</p>
-          </div>
+        {mode === 'editing' && sourceImage && (
+          <TwibonEditor
+            sourceImage={sourceImage}
+            onComposited={handleComposited}
+            onCancel={reset}
+          />
         )}
 
         {mode === 'done' && composited && (
